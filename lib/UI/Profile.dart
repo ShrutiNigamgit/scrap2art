@@ -10,8 +10,106 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-        return Center(
-      child: Text("This is Profile page"),
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 30),
+          child: Column(
+            children: [
+              Expanded(
+                  flex: 3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "Profile",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 25),
+                      ),
+                      CircleAvatar(
+                        backgroundColor: Color(0x408E97FD),
+                        radius: 60,
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 60,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xff8E97FD),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: SizedBox(
+                          width: 130,
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                'Edit Profile',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+              Expanded(
+                flex: 5,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Name',
+                      ),
+                    ),
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Phone Number ',
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Email',
+                      ),
+                    ),
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Location',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Container(),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

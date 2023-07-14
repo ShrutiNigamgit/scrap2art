@@ -33,16 +33,17 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(eccentricity: 0.0),
-          child: const Icon(Icons.add),
           backgroundColor: Color(0xff8E97FD),
           onPressed: () {
             setState(() {
               _bottomNavIndex = 4;
-              print("Index is tapped $_bottomNavIndex");
+              // print("Index is tapped $_bottomNavIndex");
             });
           },
+          child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: AnimatedBottomNavigationBar(

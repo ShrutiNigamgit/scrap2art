@@ -10,8 +10,11 @@ class BuyPage extends StatefulWidget {
 class _BuyPageState extends State<BuyPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("This is Buy page"),
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 50, 10, 70),
+        child: Column(),
+      ),
     );
   }
 }
