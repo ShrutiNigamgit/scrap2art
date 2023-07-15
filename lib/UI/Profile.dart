@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({Key? key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -13,61 +14,63 @@ class _ProfilePageState extends State<ProfilePage> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 10, 10, 30),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                  flex: 3,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "Profile",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 25),
+                flex: 3,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Profile",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 25,
                       ),
-                      CircleAvatar(
-                        backgroundColor: Color(0x408E97FD),
-                        radius: 60,
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 60,
-                        ),
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Color(0x408E97FD),
+                      radius: 60,
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: 60,
                       ),
-                      SizedBox(height: 16),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xff8E97FD),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: SizedBox(
-                          width: 130,
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.edit,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xff8E97FD),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: SizedBox(
+                        width: 130,
+                        height: 40,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              'Edit Profile',
+                              style: TextStyle(
                                 color: Colors.white,
-                                size: 20,
+                                fontSize: 16,
                               ),
-                              SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                'Edit Profile',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 16),
               Expanded(
                 flex: 5,
                 child: Column(
@@ -83,7 +86,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Phone Number ',
+                        hintText: 'Phone Number',
                       ),
                     ),
                     TextField(
@@ -105,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Expanded(
                 flex: 2,
                 child: Container(),
-              )
+              ),
             ],
           ),
         ),

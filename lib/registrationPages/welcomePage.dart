@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scrap2art/UI/HomePage.dart';
 import 'signUpPage.dart';
 
 class welcomePage extends StatefulWidget {
@@ -96,7 +97,8 @@ class _welcomePageState extends State<welcomePage> {
               ),
               SizedBox(height: 30),
               GestureDetector(
-                onTap: () {},
+                  onTap:(){Navigator.push(context, MaterialPageRoute(builder:(context)=>HomePage()));},
+
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   height: 40,
