@@ -38,6 +38,8 @@ dependencies:
   animated_bottom_navigation_bar: ^1.2.0
   firebase_core: ^2.15.0
   firebase_auth: ^4.7.0
+  fluttertoast: ^8.2.2
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:

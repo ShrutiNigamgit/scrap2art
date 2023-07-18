@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:scrap2art/registrationPages/loginPage.dart';
 import 'package:scrap2art/registrationPages/signUpPage.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class initialWelcomeScreen extends StatefulWidget {
   const initialWelcomeScreen({super.key});
@@ -76,21 +77,8 @@ class _initialWelcomeScreenState extends State<initialWelcomeScreen> {
             SizedBox(height: 20),
             GestureDetector(
               onTap: () {
-
-                // this is just for testing the firebase autenticatio and it works
-                // FirebaseAuth.instance
-                //     .createUserWithEmailAndPassword(
-                //         email: "a@b.com", password: "Xerox123")
-                //     .then((value) {
-                //   print("new user created succesfully"); 
-                //   return Navigator.push(context,
-                //       MaterialPageRoute(builder: (context) => loginPage()));
-                // }).onError((error, stackTrace) =>
-                //         print("error,${error.toString()} "));
-
-
                 Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => loginPage()));
+                    MaterialPageRoute(builder: (context) => loginPage()));
               },
               child: Text(
                 "ALREADY HAVE AN ACCOUNT? LOG IN",

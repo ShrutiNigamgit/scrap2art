@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:scrap2art/registrationPages/initial_Welcome_Screen.dart';
 import 'package:scrap2art/registrationPages/signUpPage.dart';
 import 'package:scrap2art/registrationPages/welcomePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:scrap2art/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class loginPage extends StatefulWidget {
   const loginPage({Key? key});
 
@@ -10,6 +16,12 @@ class loginPage extends StatefulWidget {
 }
 
 class _loginPageState extends State<loginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,45 +98,64 @@ class _loginPageState extends State<loginPage> {
                     ),
                   ),
                   SizedBox(height: 40),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Color(0xFFF2F3F7),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Email address',
-                          border: InputBorder.none,
-                          contentPadding:
-                          EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          controller: emailController,
+                          decoration: const InputDecoration(
+                            hintText: 'Email',
+                            prefixIcon: Icon(Icons.alternate_email),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter Email';
+                            }
+                            return null;
+                          },
                         ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Color(0xFFF2F3F7),
-                      ),
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          border: InputBorder.none,
-                          contentPadding:
-                          EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          controller: passwordController,
+                          decoration: const InputDecoration(
+                            hintText: 'Password',
+                            prefixIcon: Icon(Icons.lock_open),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter password';
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 20),
                   GestureDetector(
-                    onTap:(){Navigator.push(context, MaterialPageRoute(builder:(context)=>welcomePage()));},
+                    onTap: () {
+                      _auth
+                          .signInWithEmailAndPassword(
+                              email: "a@b.com", password: "Xerox123")
+                          .then((value) {
+                        Utils().toastMessage(value.user!.email.toString());
+                        print(emailController.text.toString());
+                        print(passwordController.text.toString());
+                        print("User logged in successfully");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => welcomePage()));
+                      }).onError((error, stackTrace) {
+                        debugPrint(error.toString());
+                        Utils().toastMessage(error.toString());
+                      });
+                    },
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.6,
                       height: 40,
@@ -154,7 +185,12 @@ class _loginPageState extends State<loginPage> {
                   ),
                   SizedBox(height: 20),
                   GestureDetector(
-                    onTap:(){Navigator.push(context, MaterialPageRoute(builder:(context)=>signUpPage()));},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => signUpPage()));
+                    },
                     child: Text(
                       "DON'T HAVE AN ACCOUNT? SIGN UP",
                       style: TextStyle(

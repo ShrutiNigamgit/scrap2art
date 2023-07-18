@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:scrap2art/registrationPages/loginPage.dart';
 import 'package:scrap2art/registrationPages/welcomePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:scrap2art/utils.dart';
+
 class signUpPage extends StatefulWidget {
   const signUpPage({Key? key}) : super(key: key);
 
@@ -9,6 +14,12 @@ class signUpPage extends StatefulWidget {
 }
 
 class _signUpPageState extends State<signUpPage> {
+  final _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,67 +96,79 @@ class _signUpPageState extends State<signUpPage> {
                     ),
                   ),
                   SizedBox(height: 25),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Color(0xFFF2F3F7),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Name',
-                          border: InputBorder.none,
-                          contentPadding:
-                          EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          keyboardType: TextInputType.name,
+                          controller: nameController,
+                          decoration: const InputDecoration(
+                            hintText: 'Name',
+                            prefixIcon: Icon(Icons.person),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter Name';
+                            }
+                            return null;
+                          },
                         ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Color(0xFFF2F3F7),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Email address',
-                          border: InputBorder.none,
-                          contentPadding:
-                          EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Color(0xFFF2F3F7),
-                      ),
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          border: InputBorder.none,
-                          contentPadding:
-                          EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+                        TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          controller: emailController,
+                          decoration: const InputDecoration(
+                            hintText: 'Email',
+                            prefixIcon: Icon(Icons.alternate_email),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter Email';
+                            }
+                            return null;
+                          },
                         ),
-                      ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          controller: passwordController,
+                          decoration: const InputDecoration(
+                            hintText: 'Password',
+                            prefixIcon: Icon(Icons.lock_open),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter password';
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => welcomePage()),
-                      );
+                      // This is just for testing the firebase authentication and it works
+                      FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: emailController.text.toString(),
+                              password: passwordController.text.toString())
+                          .then((value) {
+                        print("new user created successfully");
+                        return Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => welcomePage()));
+                      }).catchError((error, stackTrace) {
+                        Utils().toastMessage(error.toString());
+                        // print("error,${error.toString()} ")
+                      });
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.6,
@@ -167,9 +190,12 @@ class _signUpPageState extends State<signUpPage> {
                   ),
                   SizedBox(height: 20),
                   GestureDetector(
-                    onTap:(){Navigator.push(context, MaterialPageRoute(builder:(context)=>loginPage()));},
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => loginPage()));
+                    },
                     child: Text(
-                      "ALREADY HAVE AN ACCOUNT ?LOG IN",
+                      "ALREADY HAVE AN ACCOUNT? LOG IN",
                       style: TextStyle(
                         color: Color(0xFFA1A4B2),
                         fontSize: 14,
