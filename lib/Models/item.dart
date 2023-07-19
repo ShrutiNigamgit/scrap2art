@@ -9,7 +9,7 @@ class Item {
 }
 
 // its is just some dummy data for now
-List<Item> items = [
+List<Item>  items = [
   Item('Item 1', 'Description 1', 'items1.png', '100', "2020"),
   Item('Item 2', 'Description 2', 'image2.png', '150', "2020"),
   Item('Item 3', 'Description 3', 'image3.png', '200', "2020"),
