@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:scrap2art/utils.dart';
-
+import 'BuyPage.dart';
 class SellPage extends StatefulWidget {
   const SellPage({super.key});
 
@@ -17,7 +17,14 @@ class _SellPageState extends State<SellPage> {
   final sellerPhone = TextEditingController();
   final productName = TextEditingController();
   final description = TextEditingController();
+  final chooseType = TextEditingController();
+  bool productType = true;
   final price = TextEditingController();
+
+  // Create a list of options for the dropdown menu
+  List<String> productTypes = ['Raw', 'Furnished'];
+  String selectedProductType = ''; // Set a default selected value
+
 
   @override
   void dispose() {
@@ -120,6 +127,24 @@ class _SellPageState extends State<SellPage> {
                       hintText: 'Description',
                     ),
                   ),
+                  // Dropdown list for type of product
+                  DropdownButtonFormField<String>(
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        productType = newValue == 'Raw'?true:false;
+                      });
+                    },
+                    items: [
+                      DropdownMenuItem(child: Text("Furnished"),value: 'Furnished',),
+                      DropdownMenuItem(child: Text("Raw"),value: 'Raw',)
+                    ],
+
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Type of Product',
+                    ),
+                  ),
+
                   TextField(
                     controller: price,
                     keyboardType: TextInputType.number,
@@ -173,7 +198,7 @@ class _SellPageState extends State<SellPage> {
                         "Price": price.text.toString(),
                         "ProductImageLink": "imagelink",
                         "SellerID": "SellerID",
-                        "isRaw": false,
+                        "isRaw": productType,
                         "productId": id,
                       }).then((value) {
                         Utils().toastMessage("Product Added Successfully");

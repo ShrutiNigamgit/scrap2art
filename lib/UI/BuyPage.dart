@@ -13,7 +13,7 @@ class BuyPage extends StatefulWidget {
 
 class _BuyPageState extends State<BuyPage> {
   final fireStoreRef =
-      FirebaseFirestore.instance.collection("Products").snapshots();
+  FirebaseFirestore.instance.collection("Products").snapshots();
   bool raw = false;
   final selectedStyle = TextStyle(
       fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff8E97FD));
@@ -84,8 +84,8 @@ class _BuyPageState extends State<BuyPage> {
 
                     final products = snapshot.data!.docs
                         .where((doc) =>
-                            doc['isRaw'] ==
-                            raw) // Filtering based on isRaw parameter
+                    doc['isRaw'] ==
+                        raw) // Filtering based on isRaw parameter
                         .toList();
 
                     return Expanded(
@@ -121,10 +121,10 @@ class _BuyPageState extends State<BuyPage> {
                                   flex: 2,
                                   child: Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 8.0),
+                                    EdgeInsets.symmetric(horizontal: 8.0),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Column(
                                           children: [
