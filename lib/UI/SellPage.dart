@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:scrap2art/utils.dart';
 import 'BuyPage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 class SellPage extends StatefulWidget {
   const SellPage({super.key});
 
@@ -25,7 +30,25 @@ class _SellPageState extends State<SellPage> {
   List<String> productTypes = ['Raw', 'Furnished'];
   String selectedProductType = ''; // Set a default selected value
 
+  // Here we are defining a variable to store the image file.
+  File? _image;
+  final picker = ImagePicker();
 
+  // This function is used to get the image from the gallery.
+  Future getImage() async {
+    final pickedFile =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+
+    setState(() {
+      if (pickedFile != null)
+        _image = File(pickedFile.path);
+      else
+        Utils().toastMessage("No image selected");
+    });
+  }
+
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
   @override
   void dispose() {
     // Here we are disposing the controllers to avoid memory leaks.
@@ -50,13 +73,20 @@ class _SellPageState extends State<SellPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        backgroundColor: Color(0x408E97FD),
-                        radius: 60,
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: 60,
+                      GestureDetector(
+                        onTap: () {
+                          getImage();
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Color(0x408E97FD),
+                          radius: 60,
+                          child: _image != null
+                              ? Image.file(_image!.absolute)
+                              : Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                  size: 60,
+                                ),
                         ),
                       ),
                       SizedBox(height: 16),
@@ -131,14 +161,19 @@ class _SellPageState extends State<SellPage> {
                   DropdownButtonFormField<String>(
                     onChanged: (String? newValue) {
                       setState(() {
-                        productType = newValue == 'Raw'?true:false;
+                        productType = newValue == 'Raw' ? true : false;
                       });
                     },
                     items: [
-                      DropdownMenuItem(child: Text("Furnished"),value: 'Furnished',),
-                      DropdownMenuItem(child: Text("Raw"),value: 'Raw',)
+                      DropdownMenuItem(
+                        child: Text("Furnished"),
+                        value: 'Furnished',
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Raw"),
+                        value: 'Raw',
+                      )
                     ],
-
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Type of Product',
@@ -187,7 +222,18 @@ class _SellPageState extends State<SellPage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
+                      firebase_storage.Reference ref = storage
+                          .ref()
+                          .child("ProductImages/${DateTime.now()}");
+
+                      firebase_storage.UploadTask uploadTask =
+                          ref.putFile(_image!);
+
+                      await Future.value(uploadTask);
+                      var downloadURL = await ref.getDownloadURL();
+                      print(downloadURL.toString());
+
                       String id =
                           DateTime.now().millisecondsSinceEpoch.toString();
                       firestore.doc(id).set({
@@ -196,13 +242,15 @@ class _SellPageState extends State<SellPage> {
                         "ProductName": productName.text.toString(),
                         "Description": description.text.toString(),
                         "Price": price.text.toString(),
-                        "ProductImageLink": "imagelink",
+                        "ProductImageLink": downloadURL.toString(),
                         "SellerID": "SellerID",
                         "isRaw": productType,
                         "productId": id,
                       }).then((value) {
+                        print("Product Added Successfully");
                         Utils().toastMessage("Product Added Successfully");
                       }).onError((error, stackTrace) {
+                        print("Error: ${error.toString()}");
                         Utils().toastMessage("Error: ${error.toString()}");
                       });
                     },
