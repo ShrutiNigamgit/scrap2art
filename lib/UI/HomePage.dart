@@ -24,7 +24,9 @@ class HomePageState extends State<HomePage> {
 
   List<Widget> pagesList = <Widget>[
     HomePageContent(),
-    BuyPage(),
+    BuyPage(
+      raw: false,
+    ),
     MusicPage(),
     ProfilePage(),
     SellPage(),
@@ -104,89 +106,129 @@ class _HomePageContentState extends State<HomePageContent> {
               child: GridView.count(
                 crossAxisCount: 2,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xff8E97FD),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset("assets/WelcomeImage11.png"),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Sell Scrap",
-                            style: TextStyle(color: Colors.white, fontSize: 15),
-                          )
-                        ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SellPage()),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xff8E97FD),
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/WelcomeImage11.png"),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Sell Scrap",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffFA6E5A),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/WelcomeImage12.png"),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Buy Scrap",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )
-                          ],
-                        )),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        // but this needs to go with raw buy page.
+                        MaterialPageRoute(
+                            builder: (context) => BuyPage(
+                                  raw: true,
+                                )),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Color(0xffFA6E5A),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/WelcomeImage12.png"),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Buy Scrap",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              )
+                            ],
+                          )),
+                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffFEB18F),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/WelcomeImage21.png"),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Sell your creativity",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )
-                          ],
-                        )),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SellPage()),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Color(0xffFEB18F),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/WelcomeImage21.png"),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Sell your creativity",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              )
+                            ],
+                          )),
+                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffFFCF86),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/WelcomeImage22.png"),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Find something UNIQUE",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )
-                          ],
-                        )),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BuyPage(
+                                  raw: false,
+                                )),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Color(0xffFFCF86),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/WelcomeImage22.png"),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Find something UNIQUE",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              )
+                            ],
+                          )),
+                    ),
                   )
                 ],
               ),

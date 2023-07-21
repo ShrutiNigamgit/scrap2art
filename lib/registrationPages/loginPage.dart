@@ -120,6 +120,7 @@ class _loginPageState extends State<loginPage> {
                           height: 10,
                         ),
                         TextFormField(
+                          obscureText: true,
                           keyboardType: TextInputType.text,
                           controller: passwordController,
                           decoration: const InputDecoration(

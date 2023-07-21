@@ -137,6 +137,7 @@ class _signUpPageState extends State<signUpPage> {
                         TextFormField(
                           keyboardType: TextInputType.text,
                           controller: passwordController,
+                          obscureText: true,
                           decoration: const InputDecoration(
                             hintText: 'Password',
                             prefixIcon: Icon(Icons.lock_open),
