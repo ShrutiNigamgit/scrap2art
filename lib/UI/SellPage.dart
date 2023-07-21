@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:scrap2art/utils.dart';
-import 'BuyPage.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class SellPage extends StatefulWidget {
@@ -63,66 +62,65 @@ class _SellPageState extends State<SellPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: Column(
             children: [
               Expanded(
                   flex: 3,
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            getImage();
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Color(0x408E97FD),
-                            radius: 60,
-                            child: _image != null
-                                ? Image.file(_image!.absolute)
-                                : Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                    size: 60,
-                                  ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xff8E97FD),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: SizedBox(
-                            width: 130,
-                            height: 40,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.photo,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          getImage();
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Color(0x408E97FD),
+                          radius: 60,
+                          child: _image != null
+                              ? Image.file(_image!.absolute)
+                              : Icon(
+                                  Icons.add,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 60,
                                 ),
-                                SizedBox(
-                                  width: 4,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xff8E97FD),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: SizedBox(
+                          width: 130,
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.photo,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                'Upload Photo',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
                                 ),
-                                Text(
-                                  'Upload Photo',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   )),
               Expanded(
                 flex: 7,
@@ -158,6 +156,15 @@ class _SellPageState extends State<SellPage> {
                         hintText: 'Description',
                       ),
                     ),
+
+                    TextField(
+                      controller: price,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Price',
+                      ),
+                    ),
                     // Dropdown list for type of product
                     DropdownButtonFormField<String>(
                       onChanged: (String? newValue) {
@@ -178,15 +185,6 @@ class _SellPageState extends State<SellPage> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Type of Product',
-                      ),
-                    ),
-
-                    TextField(
-                      controller: price,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Price',
                       ),
                     ),
                   ],
@@ -235,8 +233,7 @@ class _SellPageState extends State<SellPage> {
                         var downloadURL = await ref.getDownloadURL();
                         print(downloadURL.toString());
 
-                        int id =
-                            DateTime.now().millisecondsSinceEpoch;
+                        int id = DateTime.now().millisecondsSinceEpoch;
                         firestore.doc(id.toString()).set({
                           "SellerName": sellerName.text.toString(),
                           "SellerPhone": sellerPhone.text.toString(),

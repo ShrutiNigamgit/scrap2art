@@ -11,9 +11,10 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+        child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -23,13 +24,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      "Profile",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 25,
-                      ),
-                    ),
+                    // Text(
+                    //   "Profile",
+                    //   style: TextStyle(
+                    //     fontWeight: FontWeight.w500,
+                    //     fontSize: 25,
+                    //   ),
+                    // ),
                     CircleAvatar(
                       backgroundColor: Color(0x408E97FD),
                       radius: 60,
@@ -70,7 +71,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
               ),
-              SizedBox(height: 16),
               Expanded(
                 flex: 5,
                 child: Column(
@@ -106,7 +106,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Container(),
               ),
             ],
