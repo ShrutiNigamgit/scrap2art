@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
@@ -24,13 +25,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // Text(
-                    //   "Profile",
-                    //   style: TextStyle(
-                    //     fontWeight: FontWeight.w500,
-                    //     fontSize: 25,
-                    //   ),
-                    // ),
                     CircleAvatar(
                       backgroundColor: Color(0x408E97FD),
                       radius: 60,
@@ -102,6 +96,29 @@ class _ProfilePageState extends State<ProfilePage> {
                         hintText: 'Location',
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                      onTap: logout,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF7583CA),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'LOG OUT',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -114,5 +131,18 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+
+  void logout() async {
+    try {
+      // Sign the user out using FirebaseAuth
+      await FirebaseAuth.instance.signOut();
+
+      // Navigate to the login screen after successful logout
+      Navigator.pushNamedAndRemoveUntil(context, 'initial_Welcome_Screen', (route) => false);
+    } catch (e) {
+      // Handle any potential errors during the logout process
+      print('Error during logout: $e');
+    }
   }
 }

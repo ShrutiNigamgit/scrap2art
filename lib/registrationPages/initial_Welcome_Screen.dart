@@ -12,6 +12,7 @@ class initialWelcomeScreen extends StatefulWidget {
 }
 
 class _initialWelcomeScreenState extends State<initialWelcomeScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +72,8 @@ class _initialWelcomeScreenState extends State<initialWelcomeScreen> {
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
-                )),
+                ),
+                ),
               ),
             ),
             SizedBox(height: 20),

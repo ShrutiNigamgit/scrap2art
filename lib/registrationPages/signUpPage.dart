@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:scrap2art/registrationPages/loginPage.dart';
 import 'package:scrap2art/registrationPages/welcomePage.dart';
@@ -19,7 +20,7 @@ class _signUpPageState extends State<signUpPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
-
+  final fireStore = FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,10 +159,25 @@ class _signUpPageState extends State<signUpPage> {
                       // This is just for testing the firebase authentication and it works
                       FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
-                              email: emailController.text.toString(),
-                              password: passwordController.text.toString())
+                          email: emailController.text.toString(),
+                          password: passwordController.text.toString())
                           .then((value) {
                         print("new user created successfully");
+                        // also add user info in firestore
+                        int id = DateTime
+                            .now()
+                            .millisecondsSinceEpoch;
+                        fireStore.doc(id.toString()).set({
+                          "Name": nameController.text.toString(),
+                          "Email": emailController.text.toString(),
+                          "UserId": id,
+                        }).then((value) {
+                          print("User Added Successfully");
+                          Utils().toastMessage("User Added Successfully");
+                        }).onError((error, stackTrace) {
+                          print("Error: ${error.toString()}");
+                          Utils().toastMessage("Error: ${error.toString()}");
+                        });
                         return Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -170,6 +186,8 @@ class _signUpPageState extends State<signUpPage> {
                         Utils().toastMessage(error.toString());
                         // print("error,${error.toString()} ")
                       });
+
+
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.6,
@@ -187,8 +205,8 @@ class _signUpPageState extends State<signUpPage> {
                           ),
                         ),
                       ),
-                    ),
-                  ),
+
+                  ),),
                   SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
