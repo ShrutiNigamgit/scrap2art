@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,42 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  TextEditingController nameController =
+      TextEditingController(text: "Name loading...");
+  TextEditingController emailController =
+      TextEditingController(text: "Email loading...");
+  TextEditingController phoneController =
+      TextEditingController(text: "Phone loading...");
+  TextEditingController locationController =
+      TextEditingController(text: "Location loading...");
+
+  Future<bool> getDetails() async {
+    final user = FirebaseAuth.instance.currentUser;
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get();
+
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    emailController.text = data["Email"];
+    nameController.text = data["Name"];
+    phoneController.text = "Phone";
+    locationController.text = "Location";
+
+    return true;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await getDetails();
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,13 +62,18 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: Color(0x408E97FD),
-                      radius: 60,
-                      child: Icon(
-                        Icons.person,
-                        color: Colors.white,
-                        size: 60,
+                    GestureDetector(
+                      onTap: () {
+                        getDetails();
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Color(0x408E97FD),
+                        radius: 60,
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 60,
+                        ),
                       ),
                     ),
                     Container(
@@ -71,12 +113,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextField(
+                      controller: nameController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Name',
                       ),
                     ),
                     TextField(
+                      controller: phoneController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -84,12 +128,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Email',
                       ),
                     ),
                     TextField(
+                      controller: locationController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -139,7 +185,8 @@ class _ProfilePageState extends State<ProfilePage> {
       await FirebaseAuth.instance.signOut();
 
       // Navigate to the login screen after successful logout
-      Navigator.pushNamedAndRemoveUntil(context, 'initial_Welcome_Screen', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, 'initial_Welcome_Screen', (route) => false);
     } catch (e) {
       // Handle any potential errors during the logout process
       print('Error during logout: $e');

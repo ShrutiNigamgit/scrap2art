@@ -15,7 +15,7 @@ void main() async {
 void isLogin() {
   final auth = FirebaseAuth.instance;
   final user = auth.currentUser;
-
+  // print(user!.uid);
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: user != null ? HomePage() : initialWelcomeScreen(),

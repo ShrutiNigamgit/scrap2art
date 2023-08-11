@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:scrap2art/utils.dart';
 
+
 class signUpPage extends StatefulWidget {
   const signUpPage({Key? key}) : super(key: key);
 
@@ -156,21 +157,23 @@ class _signUpPageState extends State<signUpPage> {
                   SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
-                      // This is just for testing the firebase authentication and it works
+                      // creating a new user with email and password
                       FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
                           email: emailController.text.toString(),
                           password: passwordController.text.toString())
                           .then((value) {
+
                         print("new user created successfully");
-                        // also add user info in firestore
-                        int id = DateTime
-                            .now()
-                            .millisecondsSinceEpoch;
+                        Utils().toastMessage("new user created successfully");
+
+                        // Now we are adding the user data to the firestore database. 
+                        String id = value.user!.uid.toString();
                         fireStore.doc(id.toString()).set({
                           "Name": nameController.text.toString(),
                           "Email": emailController.text.toString(),
                           "UserId": id,
+
                         }).then((value) {
                           print("User Added Successfully");
                           Utils().toastMessage("User Added Successfully");
@@ -178,6 +181,8 @@ class _signUpPageState extends State<signUpPage> {
                           print("Error: ${error.toString()}");
                           Utils().toastMessage("Error: ${error.toString()}");
                         });
+
+
                         return Navigator.push(
                             context,
                             MaterialPageRoute(

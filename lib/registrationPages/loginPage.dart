@@ -142,11 +142,12 @@ class _loginPageState extends State<loginPage> {
                     onTap: () {
                       _auth
                           .signInWithEmailAndPassword(
-                              email: "a@b.com", password: "Xerox123")
+                              email: emailController.text.toString(), password: passwordController.text.toString())
                           .then((value) {
                         Utils().toastMessage(value.user!.email.toString());
                         print(emailController.text.toString());
                         print(passwordController.text.toString());
+
                         print("User logged in successfully");
                         Navigator.push(
                             context,
