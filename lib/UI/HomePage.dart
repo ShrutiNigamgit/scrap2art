@@ -1,10 +1,9 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
 import 'BuyPage.dart';
-import 'Music.dart';
 import 'Profile.dart';
 import 'SellPage.dart';
+import 'Tips.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,10 +15,10 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
   final iconList = <IconData>[
-    Icons.home,
-    Icons.shopping_cart,
-    Icons.music_note_outlined,
-    Icons.person_4_outlined,
+    Icons.home_outlined,
+    Icons.sell_outlined,
+    Icons.lightbulb_outline,
+    Icons.person_outline,
   ];
 
   List<Widget> pagesList = <Widget>[
@@ -27,7 +26,7 @@ class HomePageState extends State<HomePage> {
     BuyPage(
       raw: false,
     ),
-    MusicPage(),
+    TipsnTricks(),
     ProfilePage(),
     SellPage(),
   ];
@@ -35,37 +34,36 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        floatingActionButton: FloatingActionButton(
-          shape: const CircleBorder(eccentricity: 0.0),
-          backgroundColor: Color(0xff8E97FD),
-          onPressed: () {
-            setState(() {
-              _bottomNavIndex = 4;
-              // print("Index is tapped $_bottomNavIndex");
-            });
-          },
-          child: const Icon(Icons.add),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: AnimatedBottomNavigationBar(
-          height: 70,
-          notchMargin: 10,
-          splashColor: Color(0xff8E97FD),
-          activeColor: Color(0xff8E97FD),
-          icons: iconList,
-          iconSize: 30,
-          elevation: 50,
-          blurEffect: true,
-          activeIndex: _bottomNavIndex,
-          gapLocation: GapLocation.center,
-          notchSmoothness: NotchSmoothness.sharpEdge,
-          onTap: (index) => setState(() {
-            _bottomNavIndex = index;
-            // print("Index is tapped $_bottomNavIndex");
-          }),
-        ),
-        body: pagesList[_bottomNavIndex]);
+      resizeToAvoidBottomInset: false,
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        backgroundColor: Color(0xff8E97FD),
+        onPressed: () {
+          setState(() {
+            _bottomNavIndex = 4;
+          });
+        },
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        height: 70,
+        notchMargin: 10,
+        splashColor: Color(0xff8E97FD),
+        activeColor: Color(0xff8E97FD),
+        icons: iconList,
+        iconSize: 30,
+        elevation: 50,
+        blurEffect: true,
+        activeIndex: _bottomNavIndex,
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.sharpEdge,
+        onTap: (index) => setState(() {
+          _bottomNavIndex = index;
+        }),
+      ),
+      body: pagesList[_bottomNavIndex],
+    );
   }
 }
 
@@ -81,7 +79,7 @@ class _HomePageContentState extends State<HomePageContent> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10.0, 50, 10, 70),
+        padding: const EdgeInsets.fromLTRB(20, 50, 20, 90),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -89,151 +87,54 @@ class _HomePageContentState extends State<HomePageContent> {
               padding: const EdgeInsets.only(left: 8),
               child: Text(
                 "What brings you to Scrap2Art?",
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, letterSpacing: 0.5),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Text(
-                "Features",
-                style: TextStyle(fontSize: 30),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 40),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SellPage()),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xff8E97FD),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/WelcomeImage11.png"),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Sell Scrap",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        // but this needs to go with raw buy page.
-                        MaterialPageRoute(
-                            builder: (context) => BuyPage(
-                                  raw: true,
-                                )),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Color(0xffFA6E5A),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/WelcomeImage12.png"),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "Buy Scrap",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
-                              )
-                            ],
-                          )),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SellPage()),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Color(0xffFEB18F),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/WelcomeImage21.png"),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "Sell your creativity",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
-                              )
-                            ],
-                          )),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BuyPage(
-                                  raw: false,
-                                )),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Color(0xffFFCF86),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/WelcomeImage22.png"),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "Find something UNIQUE",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
-                              )
-                            ],
-                          )),
-                    ),
-                  )
+                  _featureButton("Sell Scrap", "assets/WelcomeImage11.png", Color(0xff8E97FD), false),
+                  _featureButton("Buy Scrap", "assets/WelcomeImage12.png", Color(0xffFA6E5A), true),
+                  _featureButton("Sell your creativity", "assets/WelcomeImage21.png", Color(0xffFEB18F), false),
+                  _featureButton("Find something UNIQUE", "assets/WelcomeImage22.png", Color(0xffFFCF86), true),
                 ],
               ),
-            )
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _featureButton(String title, String imageAsset, Color color, bool isBuyPage) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => isBuyPage ? BuyPage(raw: isBuyPage) : SellPage()),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(imageAsset),
+              SizedBox(height: 10),
+              Text(
+                title,
+                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );

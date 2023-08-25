@@ -21,7 +21,9 @@ class _signUpPageState extends State<signUpPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
+
   final fireStore = FirebaseFirestore.instance.collection('users');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
