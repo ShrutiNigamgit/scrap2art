@@ -1,5 +1,8 @@
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../utils.dart';
 import 'constants.dart';
 import 'Liked.dart';
 
@@ -60,7 +63,7 @@ class _TipsnTricksState extends State<TipsnTricks> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LikedTips(likedAdvices: likedAdvices),
+                  builder: (context) => LikedTips(),
                 ),
               );
             },
@@ -128,7 +131,11 @@ class _TipsnTricksState extends State<TipsnTricks> {
                         isLiked ? Icons.favorite : Icons.favorite_border,
                         color: isLiked ? Colors.red : Color(0xFFD1D4EF),
                       ),
-                      onPressed: toggleLike,
+                      // onPressed: toggleLike,
+                    onPressed: (){
+                        toggleLike();
+                        saveToCloud(advices[index]);
+                    },
                     ),
                     ElevatedButton(
                       onPressed:() {
@@ -137,7 +144,7 @@ class _TipsnTricksState extends State<TipsnTricks> {
                       },
                       child: Text("Next Advice"),
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFF8E97FE),
+                        backgroundColor: Color(0xFF8E97FE),
                       ),
                     ),
                   ],
@@ -148,5 +155,20 @@ class _TipsnTricksState extends State<TipsnTricks> {
         ),
       ),
     );
+  }
+
+  void saveToCloud(String advice) {
+    final fireStore = FirebaseFirestore.instance.collection('users');
+    String id = FirebaseAuth.instance.currentUser!.uid;
+    // Now we are adding the user data to the firestore database.
+    // String id = value.user!.uid.toString();
+    fireStore.doc(id.toString()).update({
+      "LikedAdvices": FieldValue.arrayUnion([advice]),
+    }, ).then((value) {
+      Utils().toastMessage("User Added Successfully");
+    }).onError((error, stackTrace) {
+      print("Error: ${error.toString()}");
+      Utils().toastMessage("Error: ${error.toString()}");
+    });
   }
 }

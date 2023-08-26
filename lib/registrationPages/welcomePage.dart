@@ -22,7 +22,7 @@ class _welcomePageState extends State<welcomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Hi Shruti, Welcome',
+                'Hi, Welcome',
                 style: TextStyle(
                   color: Color(0xFFFFECCC),
                   fontSize: 35,
