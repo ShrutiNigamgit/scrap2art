@@ -118,7 +118,7 @@ class _BuyPageState extends State<BuyPage> {
                             return GestureDetector(
                               onTap:  (){Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) =>  viewProduct()),
+                                MaterialPageRoute(builder: (context) =>  viewProduct( product: product,)),
                               );},
                               child: Card(
                                 shape: RoundedRectangleBorder(
