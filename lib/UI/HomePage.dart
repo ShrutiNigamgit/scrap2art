@@ -77,32 +77,41 @@ class HomePageContent extends StatefulWidget {
 class _HomePageContentState extends State<HomePageContent> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 50, 20, 90),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Text(
-                "What brings you to Scrap2Art?",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 90),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child:  Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Welcome to Scrap2Art!",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold , color:Colors.black,),
+                    ),
+                    Image.asset('assets/Whitelogo.jpeg', width:150, height: 100),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 40),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                children: [
-                  _featureButton("Sell Scrap", "assets/WelcomeImage11.png", Color(0xff8E97FD), false),
-                  _featureButton("Buy Scrap", "assets/WelcomeImage12.png", Color(0xffFA6E5A), true),
-                  _featureButton("Sell your creativity", "assets/WelcomeImage21.png", Color(0xffFEB18F), false),
-                  _featureButton("Find something UNIQUE", "assets/WelcomeImage22.png", Color(0xffFFCF86), true),
-                ],
+              SizedBox(height: 40),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  children: [
+                    _featureButton("Sell Scrap", "assets/WelcomeImage11.png", Color(0xff8E97FD), false),
+                    _featureButton("Buy Scrap", "assets/WelcomeImage12.png", Color(0xffFA6E5A), true),
+                    _featureButton("Sell your creativity", "assets/WelcomeImage21.png", Color(0xffFEB18F), false),
+                    _featureButton("Find something UNIQUE", "assets/WelcomeImage22.png", Color(0xffFFCF86), true),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

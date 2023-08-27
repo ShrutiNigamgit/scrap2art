@@ -54,11 +54,21 @@ class _TipsnTricksState extends State<TipsnTricks> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Business Hacks & Tips ",)),
-        backgroundColor: Color(0xFF8E97FE),
+        backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            Image.asset('assets/Whitelogo.jpeg', width:120, height: 90),
+            // Add some spacing between the image and title
+            Text(
+              "Business Hacks & Tips",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold , color:Colors.black,),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.bookmark),
+            icon: Icon(Icons.bookmark_outline_outlined),
+            color: Colors.black,
             onPressed: () {
               Navigator.push(
                 context,
@@ -132,10 +142,10 @@ class _TipsnTricksState extends State<TipsnTricks> {
                         color: isLiked ? Colors.red : Color(0xFFD1D4EF),
                       ),
                       // onPressed: toggleLike,
-                    onPressed: (){
+                      onPressed: (){
                         toggleLike();
                         saveToCloud(advices[index]);
-                    },
+                      },
                     ),
                     ElevatedButton(
                       onPressed:() {
@@ -165,7 +175,7 @@ class _TipsnTricksState extends State<TipsnTricks> {
     fireStore.doc(id.toString()).update({
       "LikedAdvices": FieldValue.arrayUnion([advice]),
     }, ).then((value) {
-      Utils().toastMessage("User Added Successfully");
+      Utils().toastMessage("Bookmark Saved");
     }).onError((error, stackTrace) {
       print("Error: ${error.toString()}");
       Utils().toastMessage("Error: ${error.toString()}");

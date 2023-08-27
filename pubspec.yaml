@@ -95,7 +95,9 @@ flutter:
     - assets/WelcomeImage12.png
     - assets/WelcomeImage21.png
     - assets/WelcomeImage22.png
-    -
+    - assets/Whitelogo.jpeg
+    - assets/Purplelogo.jpeg
+    - assets/Mainlogo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

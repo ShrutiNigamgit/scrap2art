@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:scrap2art/UI/viewProduct.dart';
 
 import '../Models/item.dart';
 
@@ -28,18 +29,26 @@ class _BuyPageState extends State<BuyPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 50, 10, 30),
+            padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Buy at affordable rates',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children:<Widget> [
+                      Text(
+                        'Buy at affordable rates',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      Image.asset('assets/Whitelogo.jpeg',width:150,height:90),
+                    ],
                   ),
                 ),
+
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -106,63 +115,77 @@ class _BuyPageState extends State<BuyPage> {
                           itemCount: products.length,
                           itemBuilder: (BuildContext context, int index) {
                             final product = products[index];
-                            return Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Column(
-                                children: <Widget>[
-                                  Expanded(
-                                    flex: 8,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(10.0),
-                                      ),
-                                      child: CachedNetworkImage(
-                                        imageUrl: product['ProductImageLink'],
-                                        placeholder: (context, url) => Center(
-                                            child: CircularProgressIndicator()),
-                                        errorWidget: (context, url, error) =>
-                                            Icon(Icons.error),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Column(
-                                            children: [
-                                              Expanded(child: Container()),
-                                              Text(
-                                                "₹${product['Price']}",
-                                                style: TextStyle(
-                                                    color: Colors.green,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(
-                                                product['ProductName'],
-                                                style: TextStyle(fontSize: 15),
-                                              ),
-                                              Expanded(child: Container()),
-                                            ],
-                                          ),
-                                          Expanded(child: Container()),
-                                          Icon(
-                                            Icons.call,
-                                            color: Colors.green,
-                                          ),
-                                        ],
+                            return GestureDetector(
+                              onTap:  (){Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  viewProduct()),
+                              );},
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Column(
+                                  children: <Widget>[
+                                    Expanded(
+                                      flex: 8,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(10.0),
+                                        ),
+                                        child: CachedNetworkImage(
+                                          imageUrl: product['ProductImageLink'],
+                                          fit: BoxFit.cover, // Fit the image within the container
+                                          placeholder: (context, url) => Center(
+                                              child: CircularProgressIndicator()),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    Expanded(
+                                      flex: 3,
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Expanded(child: Container()),
+                                                SizedBox(height : 5,),
+                                                Text(
+                                                  product['ProductName'],
+                                                  style: TextStyle(fontSize: 15,fontWeight:
+                                                  FontWeight.bold),),
+
+                                                SizedBox(height : 5,),
+                                                Text(
+                                                  "₹${product['Price']}",
+                                                  style: TextStyle(
+                                                      color: Color(0xFF8E97FD),
+                                                      fontWeight:
+                                                      FontWeight.bold),
+                                                ),
+                                                SizedBox(height : 5,),
+                                                Expanded(child: Container()),
+                                              ],
+                                            ),
+                                            Expanded(child: Container()),
+                                            Icon(
+                                              Icons.chat_bubble_outline,
+                                              color: Color(0xFF8E97FD),
+                                              size:18,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           },
