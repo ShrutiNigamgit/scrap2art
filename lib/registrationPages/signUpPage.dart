@@ -175,7 +175,7 @@ class _signUpPageState extends State<signUpPage> {
                           "Name": nameController.text.toString(),
                           "Email": emailController.text.toString(),
                           "UserId": id,
-
+                          "LikedAdvices": "no advice liked yet",
                         }).then((value) {
                           print("User Added Successfully");
                           Utils().toastMessage("User Added Successfully");

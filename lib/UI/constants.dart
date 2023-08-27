@@ -130,7 +130,6 @@ import 'package:flutter/material.dart';
     "Show how your product solves problems.",
     "Use memories to make people care.",
     "Test where ads work best.",
-
     "Craft a memorable brand slogan.",
     "Use vibrant visuals for product showcases.",
     "Run Instagram live sessions to connect.",
