@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:scrap2art/registrationPages/initial_Welcome_Screen.dart';
-import 'package:scrap2art/registrationPages/signUpPage.dart';
-import 'package:scrap2art/registrationPages/welcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:scrap2art/UI/registrationPages/signUpPage.dart';
+import 'package:scrap2art/UI/registrationPages/welcomePage.dart';
 import 'package:scrap2art/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

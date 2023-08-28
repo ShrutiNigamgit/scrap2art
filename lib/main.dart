@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:scrap2art/registrationPages/initial_Welcome_Screen.dart';
-import 'UI/HomePage.dart';
+import 'UI/HomePages/HomePage.dart';
+import 'UI/registrationPages/initial_Welcome_Screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

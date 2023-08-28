@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scrap2art/registrationPages/loginPage.dart';
-import 'package:scrap2art/registrationPages/signUpPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:scrap2art/UI/registrationPages/loginPage.dart';
+import 'package:scrap2art/UI/registrationPages/signUpPage.dart';
 
 class initialWelcomeScreen extends StatefulWidget {
   const initialWelcomeScreen({super.key});

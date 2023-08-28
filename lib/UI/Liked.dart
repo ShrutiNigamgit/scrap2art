@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'Tips.dart';
-import 'constants.dart';
+import 'HomePages/Tips.dart';
+import '../Controllers/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LikedTips extends StatefulWidget {

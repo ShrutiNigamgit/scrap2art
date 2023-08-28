@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scrap2art/UI/HomePage.dart';
+import 'package:scrap2art/UI/HomePages/HomePage.dart';
 import 'signUpPage.dart';
 
 class welcomePage extends StatefulWidget {

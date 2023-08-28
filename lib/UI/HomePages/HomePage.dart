@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:scrap2art/UI/Chat/AllChats.dart';
 import 'BuyPage.dart';
 import 'Profile.dart';
 import 'SellPage.dart';
@@ -94,7 +95,14 @@ class _HomePageContentState extends State<HomePageContent> {
                       "Welcome to Scrap2Art!",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold , color:Colors.black,),
                     ),
-                    Image.asset('assets/Whitelogo.jpeg', width:150, height: 100),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AllChats()),
+                        );
+                      },
+                      child: Image.asset('assets/Whitelogo.jpeg', width:150, height: 100)),
                   ],
                 ),
               ),

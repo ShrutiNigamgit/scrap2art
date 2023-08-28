@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:scrap2art/utils.dart';
@@ -241,7 +242,7 @@ class _SellPageState extends State<SellPage> {
                           "Description": description.text.toString(),
                           "Price": price.text.toString(),
                           "ProductImageLink": downloadURL.toString(),
-                          "SellerID": "SellerID",
+                          "SellerID": FirebaseAuth.instance.currentUser!.uid,
                           "isRaw": productType,
                           "productId": id,
                         }).then((value) {

@@ -2,9 +2,9 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../utils.dart';
-import 'constants.dart';
-import 'Liked.dart';
+import '../../utils.dart';
+import '../../Controllers/constants.dart';
+import '../Liked.dart';
 
 class TipsnTricks extends StatefulWidget {
   const TipsnTricks({super.key});

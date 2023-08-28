@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:scrap2art/registrationPages/loginPage.dart';
-import 'package:scrap2art/registrationPages/welcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:scrap2art/UI/registrationPages/loginPage.dart';
+import 'package:scrap2art/UI/registrationPages/welcomePage.dart';
 import 'package:scrap2art/utils.dart';
 
 

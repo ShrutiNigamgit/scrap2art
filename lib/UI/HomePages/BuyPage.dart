@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:scrap2art/UI/viewProduct.dart';
 
-import '../Models/item.dart';
+import '../../Models/item.dart';
 
 class BuyPage extends StatefulWidget {
   final bool raw;
