@@ -5,6 +5,7 @@ import 'UI/HomePages/HomePage.dart';
 import 'UI/registrationPages/initial_Welcome_Screen.dart';
 
 void main() async {
+  // Initialize Firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -15,7 +16,6 @@ void main() async {
 void isLogin() {
   final auth = FirebaseAuth.instance;
   final user = auth.currentUser;
-  // print(user!.uid);
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: user != null ? HomePage() : initialWelcomeScreen(),

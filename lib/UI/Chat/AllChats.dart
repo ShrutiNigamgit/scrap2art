@@ -103,7 +103,8 @@ Future<String> getReceiverNameFromID(String userID) async {
       return "name not found";
     }
   } catch (e) {
+
     print('Error fetching user data: $e');
-    return "some error occured";
+    return "some error occurred";
   }
 }

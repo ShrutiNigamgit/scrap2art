@@ -11,7 +11,7 @@ Widget messageItem(DocumentSnapshot document) {
 
   var color = data['sendBy'] == FirebaseAuth.instance.currentUser!.uid
       ? Color(0xFF8E97FD)
-      : Colors.grey.shade200;
+      : Color(0xFFefebe2);
 
   return Align(
     alignment: alignment,
@@ -28,8 +28,8 @@ Widget messageItem(DocumentSnapshot document) {
           Text(
             data['message'],
             style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
             ),
           ),
         ],

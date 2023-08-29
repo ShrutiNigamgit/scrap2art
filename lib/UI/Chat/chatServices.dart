@@ -23,7 +23,7 @@ void sendMessage(String message, String receiverId, String receiverName) {
 
   // add the message object to firebase in the chat room
   final fireStore =
-      FirebaseFirestore.instance.collection('chatRooms').doc(chatRoomId); 
+        FirebaseFirestore.instance.collection('chatRooms').doc(chatRoomId);
 
   fireStore.collection("messages").add(messageInfo.toMap()).then((value) {
     print("Message Sent successfully");
@@ -35,7 +35,6 @@ void sendMessage(String message, String receiverId, String receiverName) {
 
   // making entries about chat being started in the users, in senders and receivers database.
   informUsersAboutChat(senderId, receiverId);
-
 
 }
 
