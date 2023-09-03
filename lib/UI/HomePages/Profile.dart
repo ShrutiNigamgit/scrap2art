@@ -149,7 +149,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       onTap: logout,
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.4,
-                        height: 40,
+                        height: 35,
                         decoration: BoxDecoration(
                           color: Color(0xFF7583CA),
                           borderRadius: BorderRadius.circular(30),

@@ -99,6 +99,8 @@ flutter:
     - assets/Purplelogo.jpeg
     - assets/Mainlogo.png
     - assets/chat_background.png
+    - assets/chat.png
+    - assets/business_tips.png
 
       # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

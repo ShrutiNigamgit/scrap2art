@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../utils.dart';
 import '../../Controllers/constants.dart';
 import '../Liked.dart';
+import 'homePage.dart';
 
 class TipsnTricks extends StatefulWidget {
   const TipsnTricks({super.key});
@@ -57,11 +58,11 @@ class _TipsnTricksState extends State<TipsnTricks> {
         backgroundColor: Colors.white,
         title: Row(
           children: [
-            Image.asset('assets/Whitelogo.jpeg', width:120, height: 90),
+            Image.asset('assets/Whitelogo.jpeg', width:100, height: 80),
             // Add some spacing between the image and title
             Text(
               "Business Hacks & Tips",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold , color:Colors.black,),
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold , color:Colors.black,),
             ),
           ],
         ),
@@ -80,7 +81,7 @@ class _TipsnTricksState extends State<TipsnTricks> {
           ),
         ],
       ),
-      backgroundColor: Color(0xFF8E97FE),
+      backgroundColor: Colors.white,
       body: Center(
         child: Center(
           child: Container(

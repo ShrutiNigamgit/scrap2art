@@ -18,7 +18,7 @@ class HomePageState extends State<HomePage> {
   final iconList = <IconData>[
     Icons.home_outlined,
     Icons.sell_outlined,
-    Icons.lightbulb_outline,
+    Icons.chat_outlined,
     Icons.person_outline,
   ];
 
@@ -27,7 +27,7 @@ class HomePageState extends State<HomePage> {
     BuyPage(
       raw: false,
     ),
-    TipsnTricks(),
+    AllChats(),
     ProfilePage(),
     SellPage(),
   ];
@@ -82,42 +82,81 @@ class _HomePageContentState extends State<HomePageContent> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 30, 20, 90),
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 8),
-                child:  Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "Welcome to Scrap2Art!",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold , color:Colors.black,),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => AllChats()),
-                        );
-                      },
-                      child: Image.asset('assets/Whitelogo.jpeg', width:150, height: 100)),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AllChats()),
+                          );
+                        },
+                        child: Image.asset('assets/Whitelogo.jpeg',
+                            width: 150, height: 100)),
                   ],
                 ),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 30),
               Expanded(
                 child: GridView.count(
                   crossAxisCount: 2,
                   children: [
-                    _featureButton("Sell Scrap", "assets/WelcomeImage11.png", Color(0xff8E97FD), false),
-                    _featureButton("Buy Scrap", "assets/WelcomeImage12.png", Color(0xffFA6E5A), true),
-                    _featureButton("Sell your creativity", "assets/WelcomeImage21.png", Color(0xffFEB18F), false),
-                    _featureButton("Find something UNIQUE", "assets/WelcomeImage22.png", Color(0xffFFCF86), true),
+                    _featureButton("Sell Scrap", "assets/WelcomeImage11.png",
+                        Color(0xff8E97FD), false),
+                    _featureButton("Buy Scrap", "assets/WelcomeImage12.png",
+                        Color(0xffFA6E5A), true),
+                    _featureButton("Sell your creativity",
+                        "assets/WelcomeImage21.png", Color(0xffFEB18F), false),
+                    _featureButton("Find something UNIQUE",
+                        "assets/WelcomeImage22.png", Color(0xffFFCF86), true),
                   ],
                 ),
               ),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TipsnTricks()),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+
+                          child: Image.asset('assets/business_tips.png',fit: BoxFit.fill ,),
+                        ),
+                      ),
+                  ),),),
+              ),
+
+              SizedBox(height: 20),
             ],
           ),
         ),
@@ -125,12 +164,15 @@ class _HomePageContentState extends State<HomePageContent> {
     );
   }
 
-  Widget _featureButton(String title, String imageAsset, Color color, bool isBuyPage) {
+  Widget _featureButton(
+      String title, String imageAsset, Color color, bool isBuyPage) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => isBuyPage ? BuyPage(raw: isBuyPage) : SellPage()),
+          MaterialPageRoute(
+              builder: (context) =>
+                  isBuyPage ? BuyPage(raw: isBuyPage) : SellPage()),
         );
       },
       child: Padding(
@@ -147,7 +189,10 @@ class _HomePageContentState extends State<HomePageContent> {
               SizedBox(height: 10),
               Text(
                 title,
-                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ],
