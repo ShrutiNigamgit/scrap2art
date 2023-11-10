@@ -29,12 +29,12 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: Stack(
         children: <Widget>[
-          Image.asset(
-            'assets/chat_background.png',
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
-          ),
+          // Image.asset(
+          //   'assets/chat_background.png',
+          //   width: double.infinity,
+          //   height: double.infinity,
+          //   fit: BoxFit.cover,
+          // ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(

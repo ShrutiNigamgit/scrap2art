@@ -98,7 +98,7 @@ flutter:
     - assets/Whitelogo.jpeg
     - assets/Purplelogo.jpeg
     - assets/Mainlogo.png
-    - assets/chat_background.png
+    # - assets/chat_background.png
     - assets/chat.png
     - assets/business_tips.png
 
