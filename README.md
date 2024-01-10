@@ -3,7 +3,10 @@
 > **A user-friendly app to sell old items, buy scraps for creative makeovers, and promote recycling. #VocalForLocal**
 > Bridging the Gap Between Technology and Art
 ## ScreenShots
+![image](https://github.com/ShrutiNigamgit/scrap2art/assets/64163517/5dfbfb12-1d8f-4c02-aaf9-c307ad0fcac2)
+
 ## Video Demo 
+https://youtube.com/shorts/zD9LInmv0gs?si=_zhAoK8yJp_tt8vh
 ## Apk Link
 
 ## Introduction
